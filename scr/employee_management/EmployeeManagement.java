@@ -1,15 +1,16 @@
-package scr.staff_management;
+package scr.employee_management;
 import javax.swing.*;
+import hoang_lib.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
 
-public class StaffManagement extends JFrame{
-    StaffList l = new StaffList();
+public class EmployeeManagement extends JFrame{
+    EmployeeList l = new EmployeeList();
     ImportForm form = new ImportForm();
     
-    ArrayList<staff> data_list = new ArrayList<staff>();
+    ArrayList<Employee> data_list = new ArrayList<Employee>();
 
     void update_list(){
         l.remove_all_row();
@@ -44,10 +45,9 @@ public class StaffManagement extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String id = form.tf_id.getText().trim();
                 String name =  form.tf_name.getText().trim();
-                String country = form.dd_country.getSelectedItem().toString().trim();
-                String gender = (form.jr_female.isSelected() ? "Female" : "Male").trim();
-                String status = (form.is_single.isSelected() ? "Single" : "In a relationship").trim();
-                String notes = form.ta_notes.getText().trim();
+                Integer age = Integer.valueOf(form.tf_age.getText().trim());
+                String email = form.tf_email.getText().trim();
+                Integer salary = Integer.valueOf(form.tf_salary.getText().trim());
 
                 try{
                     if (id.length() == 0) throw new Exception("Id cannot be null!");
@@ -61,7 +61,14 @@ public class StaffManagement extends JFrame{
                     if (already_existing){
                         throw new Exception("Id already exists!");
                     }
-                    staff temp = new staff(id , name , country , gender , status , notes);
+                    if (!input_limit.isEmailValid(email)){
+                        throw new Exception("Invalid email!");
+                    }
+                    if (!input_limit.isNameValid(name)){
+                        throw new Exception("Invalid name!");
+                    }
+                    //Employee(String id , String name , String email , Integer age , Integer salary)
+                    Employee temp = new Employee(id , name , email , age , salary);
                     data_list.add(temp);
                     update_list();
                 }
@@ -125,11 +132,9 @@ public class StaffManagement extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String id = form.tf_id.getText().trim();
                 String name =  form.tf_name.getText().trim();
-                String country = form.dd_country.getSelectedItem().toString().trim();
-                String gender = (form.jr_female.isSelected() ? "Female" : "Male").trim();
-                String status = (form.is_single.isSelected() ? "Single" : "In a relationship").trim();
-                String notes = form.ta_notes.getText().trim();
-
+                Integer age = Integer.valueOf(form.tf_age.getText().trim());
+                String email = form.tf_email.getText().trim();
+                Integer salary = Integer.valueOf(form.tf_salary.getText().trim());
 
                 try{
                     if (id.length() == 0) throw new Exception("Id cannot be null!");
@@ -143,7 +148,7 @@ public class StaffManagement extends JFrame{
                             
                             if (name.length() == 0) throw new Exception("Name cannot be null!");
                             
-                            staff temp = new staff(id , name , country , gender , status , notes);
+                            Employee temp = new Employee(id , name , email , age , salary);
 
                             data_list.set(i , temp);
                             
