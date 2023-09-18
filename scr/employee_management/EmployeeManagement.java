@@ -1,10 +1,9 @@
 package scr.employee_management;
 import javax.swing.*;
+import hoang_lib.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 
 public class EmployeeManagement extends JFrame{
@@ -61,6 +60,12 @@ public class EmployeeManagement extends JFrame{
                     }
                     if (already_existing){
                         throw new Exception("Id already exists!");
+                    }
+                    if (!input_limit.isEmailValid(email)){
+                        throw new Exception("Invalid email!");
+                    }
+                    if (!input_limit.isNameValid(name)){
+                        throw new Exception("Invalid name!");
                     }
                     //Employee(String id , String name , String email , Integer age , Integer salary)
                     Employee temp = new Employee(id , name , email , age , salary);

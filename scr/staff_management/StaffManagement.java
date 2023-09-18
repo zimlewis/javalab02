@@ -2,9 +2,7 @@ package scr.staff_management;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 
 public class StaffManagement extends JFrame{

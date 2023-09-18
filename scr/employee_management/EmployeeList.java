@@ -49,7 +49,7 @@ public class EmployeeList extends JPanel{
 
     public void add_staff(Employee staff) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{staff.get_id(), staff.get_name(), staff.get_age(), staff.get_age(), staff.get_salary()});
+        model.addRow(new Object[]{staff.get_id(), staff.get_name(), staff.get_email(), staff.get_age(), staff.get_salary()});
     }
 
     public void remove_all_row(){
